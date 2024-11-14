@@ -1,0 +1,87 @@
+﻿#Standard Scaler SUR SELECTION DE COLONNES
+scaler_columns = ['comptage_J-7',
+                  'comptage_J-8',
+                  'comptage_J-9',
+                  'comptage_J-10',
+                  'latitude',
+                 'longitude',
+                 'annee_comptage',
+                 'mois_comptage',
+                 'jour_comptage',
+                 'week_end',
+                 'temp',
+                 'feelslike',]
+
+sc = StandardScaler()
+
+sc_columns = sc.fit_transform(df[scaler_columns])
+
+df_sc = pd.DataFrame(sc_columns, columns = scaler_columns,index = df.index.intersection(df.index))
+
+#Concat
+df_modif = pd.concat([df_ohe, df_sc, df['comptage_horaire']], axis=1)
+
+
+df_modif.info()
+
+
+
+***************************************
+
+
+#One Hot Encoding APRES TRAIN TEST SPLIT mais pas cohérent avec la boucle par compteur plus bas
+#ohe_column = ['saison',
+#             'Categorie_evenements',
+#             'zone',
+#              'ferie',
+#              'vacances',
+#              'icon']
+#ohe = OneHotEncoder( drop="first", sparse=False)
+#
+#cat_train = ohe.fit_transform(X_train[ohe_column])
+#cat_test = ohe.transform(X_test[ohe_column])
+#
+#new_columns = ohe.get_feature_names_out(ohe_column)
+
+
+#cat_train= pd.DataFrame(cat_train, columns = new_columns, index = X_train.index.intersection(X_train.index))
+#cat_test = pd.DataFrame(cat_test, columns = new_columns,index = X_test.index.intersection(X_test.index))
+
+#Standard Scaler
+#scaler_columns = ['comptage_J-7',
+#                  'comptage_J-8',
+#                  'comptage_J-9',
+#                  'comptage_J-10',
+#                  'latitude',
+#                 'longitude',
+#                 'annee_comptage',
+#                 'mois_comptage',
+#                 'jour_comptage',
+#                 'week_end',
+#                 'temp',
+#                 'feelslike',]
+
+#sc = StandardScaler()
+
+#sc_train = sc.fit_transform(X_train[scaler_columns])
+#sc_test = sc.transform(X_test[scaler_columns])
+
+#sc_train = pd.DataFrame(sc_train, columns = scaler_columns,index = X_train.index.intersection(X_train.index))
+#sc_test = pd.DataFrame(sc_test, columns = scaler_columns,index = X_test.index.intersection(X_test.index))
+
+#Concat
+#X_train = pd.concat([sc_train, cat_train], axis=1)
+
+
+#X_test = pd.concat([sc_test, cat_test], axis=1)
+
+
+****************************
+
+#séparation du jeu de données
+target = df['comptage_horaire']
+features = df.drop(['comptage_horaire'], axis = 1)
+
+X_train, X_test, y_train, y_test = train_test_split(features, target, test_size = 0.2, shuffle = False)
+
+X_train

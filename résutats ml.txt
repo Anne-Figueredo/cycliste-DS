@@ -1,0 +1,126 @@
+﻿colonnes a indexer
+identifiant_du_compteur
+nom_du_compteur
+date_comptage
+
+
+colonnes a enlever
+date_et_heure_de_comptage
+date_d'installation_du_site_de_comptage
+coordonnées_géographiques
+mois_annee_comptage
+jour_semaine_comptage
+identifiant_du_site_de_comptage
+
+
+colonnes a garder
+latitude
+longitude
+annee_comptage
+mois_comptage
+jour_comptage
+heure_comptage
+week_end
+saison
+Categorie_evenements
+zone
+nom_jour_ferie
+ferie
+vacances
+temp
+feelslike
+icon
+
+
+colonnes a encoder
+saison
+Categorie_evenements
+zone
+nom_jour_ferie
+ferie
+vacances
+icon
+
+target
+comptage_horaire
+
+
+Scores sur sc uniquement sur les colonnes non encodées
+train_score_lr                                 0.8915075
+test_score_lr             -103636839498532962304.0000000
+mae_lr                              514666693110.2064819
+train_score_rf                                 0.9568729
+test_score_rf                                  0.7609285
+mae_rf                                       245.0795060
+train_score_gb                                 0.9726418
+test_score_gb                                  0.7374234
+mae_gb                                       252.2532605
+train_score_lasso                              0.8831100
+test_score_lasso                               0.7783209
+mae_lasso                                    234.6262268
+train_score_ridge                              0.8819326
+test_score_ridge                               0.7342990
+mae_ridge                                    255.7366559
+train_score_elasticnet                         0.7176002
+test_score_elasticnet                          0.5584260
+mae_elasticnet                               294.9926627
+
+Scores sur sc sur toutes les colonnes
+train_score_lr              0.8915098
+test_score_lr               0.4870253
+mae_lr                    288.3686343
+train_score_rf              0.9562222
+test_score_rf               0.7628239
+mae_rf                    244.6095276
+train_score_gb              0.9726418
+test_score_gb               0.7374303
+mae_gb                    251.6965808
+train_score_lasso           0.8868670
+test_score_lasso            0.7815529
+mae_lasso                 232.8421415
+train_score_ridge           0.8895415
+test_score_ridge            0.7605931
+mae_ridge                 242.2838504
+train_score_elasticnet      0.8652002
+test_score_elasticnet       0.7638007
+mae_elasticnet            241.9274244
+
+Scores sur sc sur toutes les colonnes AVEC HYPERPARAMETRES GRIDSEARCH
+train_score_lr              0.8915098
+test_score_lr               0.4870253
+mae_lr                    288.3686343
+train_score_rf              0.8538859
+test_score_rf               0.6879450
+mae_rf                    271.5890757
+train_score_gb              0.9089925
+test_score_gb               0.4927245
+mae_gb                    315.1974103
+train_score_lasso           0.8868670
+test_score_lasso            0.7815529
+mae_lasso                 232.8421415
+train_score_ridge           0.8895415
+test_score_ridge            0.7605931
+mae_ridge                 242.2838504
+train_score_elasticnet      0.8768127
+test_score_elasticnet       0.7828332
+mae_elasticnet            232.2845608
+
+Scores sur sc sur toutes les colonnes AVEC HYPERPARAMETRES RANDOMIZEDSEARCH
+train_score_lr              0.8915098
+test_score_lr               0.4870253
+mae_lr                    288.3686343
+train_score_rf              0.9378920
+test_score_rf               0.7664638
+mae_rf                    242.6471944
+train_score_gb              0.9895117
+test_score_gb               0.4696287
+mae_gb                    322.7985934
+train_score_lasso           0.8868670
+test_score_lasso            0.7815529
+mae_lasso                 232.8421415
+train_score_ridge           0.8895415
+test_score_ridge            0.7605931
+mae_ridge                 242.2838504
+train_score_elasticnet      0.8832929
+test_score_elasticnet       0.7882909
+mae_elasticnet            230.1323665
