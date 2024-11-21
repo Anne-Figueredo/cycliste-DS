@@ -1,2 +1,0 @@
-comptage-velo-CLEAN.csv filter=lfs diff=lfs merge=lfs -text
-comptage-velo-donnees-compteurs.csv filter=lfs diff=lfs merge=lfs -text
