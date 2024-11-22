@@ -13,7 +13,7 @@ def authenticate_drive():
     Authentifie l'utilisateur et retourne le service API Google Drive.
     Assure une gestion claire des fichiers de credentials.
     """
-    credentials_file = 'credentials.json'
+    credentials_file = 'c:/documents/datascientest/examen/credentials.json'
     token_file = 'token.pickle'
 
     # Vérifie que le fichier credentials.json existe
