@@ -54,6 +54,14 @@ download_drive_files()
 df_old = load_old_data()
 df = load_data_clean()
 
+def download_drive_files():
+    with st.spinner('Téléchargement des fichiers depuis Google Drive...'):
+        if not os.path.exists('comptage-velo-donnees-compteurs.csv'):
+            download_file('1_0feUsaKHhuFCUCfwOkC7TwXJY3g5cSn', 'comptage-velo-donnees-compteurs.csv')
+        if not os.path.exists('comptage-velo-CLEAN.csv'):
+            download_file('1KX2kOheM7yC6-BnOX8Mgp53SwTndTMms', 'comptage-velo-CLEAN.csv')
+        st.success("Téléchargement terminé !")
+
 
 
 

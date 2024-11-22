@@ -9,36 +9,56 @@ from googleapiclient.http import MediaIoBaseDownload
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
 
 def authenticate_drive():
-    """Authentifie l'utilisateur et retourne le service API."""
+    """
+    Authentifie l'utilisateur et retourne le service API Google Drive.
+    Assure une gestion claire des fichiers de credentials.
+    """
+    credentials_file = 'credentials.json'
+    token_file = 'token.pickle'
+
+    # Vérifie que le fichier credentials.json existe
+    if not os.path.exists(credentials_file):
+        raise FileNotFoundError(
+            f"Le fichier '{credentials_file}' est introuvable. Veuillez le placer dans le dossier du script."
+        )
+
     creds = None
-    # Le fichier token.pickle stocke les informations d'authentification de l'utilisateur.
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
+
+    # Charge les credentials existants s'ils sont disponibles
+    if os.path.exists(token_file):
+        with open(token_file, 'rb') as token:
             creds = pickle.load(token)
 
-    # Si il n'y a pas de credentials valides, demande l'authentification à l'utilisateur.
+    # Si les credentials ne sont pas valides ou inexistants, lance une nouvelle authentification
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file(credentials_file, SCOPES)
             creds = flow.run_local_server(port=0)
 
-        # Sauvegarde les credentials pour la prochaine exécution
-        with open('token.pickle', 'wb') as token:
+        # Sauvegarde les nouveaux credentials
+        with open(token_file, 'wb') as token:
             pickle.dump(creds, token)
 
     # Retourne le service Google Drive
     return build('drive', 'v3', credentials=creds)
 
 def download_file(file_id, destination):
-    """Télécharge un fichier depuis Google Drive."""
-    drive_service = authenticate_drive()
-    request = drive_service.files().get_media(fileId=file_id)
-    fh = io.FileIO(destination, 'wb')
-    downloader = MediaIoBaseDownload(fh, request)
-    done = False
-    while done is False:
-        status, done = downloader.next_chunk()
-    print(f'Fichier téléchargé à : {destination}')
+    """
+    Télécharge un fichier depuis Google Drive.
+    :param file_id: ID du fichier sur Google Drive.
+    :param destination: Chemin où enregistrer le fichier téléchargé.
+    """
+    try:
+        drive_service = authenticate_drive()
+        request = drive_service.files().get_media(fileId=file_id)
+        with io.FileIO(destination, 'wb') as fh:
+            downloader = MediaIoBaseDownload(fh, request)
+            done = False
+            while not done:
+                status, done = downloader.next_chunk()
+                print(f"Téléchargement en cours... {int(status.progress() * 100)}%")
+        print(f"Fichier téléchargé avec succès : {destination}")
+    except Exception as e:
+        print(f"Erreur lors du téléchargement : {e}")
